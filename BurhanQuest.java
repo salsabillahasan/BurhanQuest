@@ -10,7 +10,7 @@ public class BurhanQuest {
                 "| |_) | |_| | |  | | | | (_| | | | | |_| | |_| |  __\\__ | |_ \n" + //
                 "|____/ \\__,_|_|  |_| |_|\\__,_|_| |_|\\__\\_\\\\__,_|\\___|___/\\__|";
     private static final String STUDENT_NAME = "Salsabilla Hasan";
-    private static final String STUDENT_ID = "250bis6548660";
+    private static final String STUDENT_ID = "2506548660";
 
 
 
