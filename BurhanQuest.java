@@ -38,6 +38,7 @@ public class BurhanQuest {
     public static void main(String[] args) throws Exception {
         // TODO: Tampilkan banner
         System.out.println(BANNER);
+        System.out.println();
         System.out.println("Selamat datang di BurhanQuest!");
         System.out.println("Dibuat oleh: " + STUDENT_NAME + " - " + STUDENT_ID);
         System.out.println("Mari kita mulai dengan membuat sejumlah data quest dan pengembara.");
@@ -49,6 +50,7 @@ public class BurhanQuest {
         // TODO: Input banyak quest dan pengembara
         while (invalidInput) {
             System.out.print("Silakan masukkan banyak quest yang ingin didaftarkan: ");
+            if (input.hasNextInt())
             String questCountInput = input.nextLine();
             // TODO: Validasi input jumlah quest
 
