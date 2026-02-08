@@ -1,20 +1,18 @@
 import java.util.Scanner;
 
-
-
 public class BurhanQuest {
-    // Banner pembuka, silakan manfaatkan variabel ini untuk menampilkan banner di awal dan di akhir program
+    // Banner pembuka, silakan manfaatkan variabel ini untuk menampilkan banner di
+    // awal dan di akhir program
     private static final String BANNER = " ____             _                  ___                 _   \n" + //
-                "| __ ) _   _ _ __| |__   __ _ _ __  / _ \\ _   _  ___ ___| |_ \n" + //
-                "|  _ \\| | | | '__| '_ \\ / _` | '_ \\| | | | | | |/ _ / __| __|\n" + //
-                "| |_) | |_| | |  | | | | (_| | | | | |_| | |_| |  __\\__ | |_ \n" + //
-                "|____/ \\__,_|_|  |_| |_|\\__,_|_| |_|\\__\\_\\\\__,_|\\___|___/\\__|";
+            "| __ ) _   _ _ __| |__   __ _ _ __  / _ \\ _   _  ___ ___| |_ \n" + //
+            "|  _ \\| | | | '__| '_ \\ / _` | '_ \\| | | | | | |/ _ / __| __|\n" + //
+            "| |_) | |_| | |  | | | | (_| | | | | |_| | |_| |  __\\__ | |_ \n" + //
+            "|____/ \\__,_|_|  |_| |_|\\__,_|_| |_|\\__\\_\\\\__,_|\\___|___/\\__|";
     private static final String STUDENT_NAME = "Salsabilla Hasan";
     private static final String STUDENT_ID = "2506548660";
 
-
-
-    // Penanda atribut, silakan manfaatkan variabel ini untuk menandai atribut di dalam data
+    // Penanda atribut, silakan manfaatkan variabel ini untuk menandai atribut di
+    // dalam data
     // Atribut yang sama
     private static final char NAME_IDENTIFIER = '!';
     private static final char STATUS_IDENTIFIER = '@';
@@ -32,7 +30,8 @@ public class BurhanQuest {
 
     private static final int MAX_EXP = 1_310_720_000;
 
-    // Scanner untuk input, silakan manfaatkan variabel ini untuk mengambil input dari user
+    // Scanner untuk input, silakan manfaatkan variabel ini untuk mengambil input
+    // dari user
     private static final Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
@@ -50,12 +49,22 @@ public class BurhanQuest {
         // TODO: Input banyak quest dan pengembara
         while (invalidInput) {
             System.out.print("Silakan masukkan banyak quest yang ingin didaftarkan: ");
-            if (input.hasNextInt())
-            String questCountInput = input.nextLine();
+   
+            if (input.hasNextInt()){
+                questCount = input.nextInt();
             // TODO: Validasi input jumlah quest
+                input.nextLine(); 
 
-            System.out.println("Input tidak valid. Harap masukkan bilangan bulat nonnegatif.");
-        }
+                if (questCount >= 0) {
+                    invalidInput = false;
+                } else {
+                    System.out.println("Input tidak valid. Harap masukkan bilangan bulat nonnegatif.");
+                }
+
+            } else {
+                input.nextLine();
+                System.out.println("Input tidak valid. Harap masukkan bilangan bulat nonnegatif.");
+            }
         
         // TODO: Input jumlah pengembara
         invalidInput = true;
