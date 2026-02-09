@@ -93,11 +93,27 @@ public class BurhanQuest {
         for (int i = 0; i < questCount; i++) {
             System.out.println("Quest " + (i + 1));
 
-            System.out.print("Masukkan nama quest: ");
-            String nama = input.nextLine();
-
-            System.out.print("Masukkan deskripsi quest: ");
-            String desc = input.nextLine();
+            String nama = "";
+            while (true) {
+                System.out.print("Masukkan nama quest: ");
+                nama = input.nextLine();
+                if (nama.matches("^[a-zA-Z0-9]+$")) {
+                    break;
+                } else {
+                    System.out.println("Input tidak valid. Harap masukkan data dengan benar.");
+                }
+            }
+         
+            String desc = "";
+            while (true) {
+                System.out.print("Masukkan deskripsi quest: ");
+                desc = input.nextLine();
+                if (desc.matches("^[a-zA-Z0-9]+$")) {
+                    break;
+                } else {
+                    System.out.println("Input tidak valid. Harap masukkan data dengan benar.");
+                }
+            }
 
             int reward = -1;
             while (reward < 0) {
