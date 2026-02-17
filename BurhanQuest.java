@@ -599,10 +599,119 @@ public class BurhanQuest {
                         }
                     }       
                     break;
+
                 case "6":
                     // TODO: Menyelesaikan quest
-                    System.out.println("Belum diimplementasikan");
+                    boolean balikMenu6 = false;
+
+                    while (!balikMenu6) {
+                        System.out.print("Masukkan ID Quest yang ingin diselesaikan (atau 'X'/'x' untuk kembali) : ");
+                        String idquestSelesai = input.nextLine();
+
+                        if (idquestSelesai.equalsIgnoreCase("x")) {
+                            balikMenu6 = true;
+                            break;
+                        }
+
+                        //cari quest
+                        Scanner cariQuest6 = new Scanner(questData);
+                        boolean questKetemu6 = false;
+                        String idPengembaraYangAmbil = "";
+                        long bonusExpQ = 0;
+
+                        while(cariQuest6.hasNextLine()) {
+                            String baris = cariQuest6.nextLine();
+                            int posisiNama6 = baris.indexOf(NAME_IDENTIFIER);
+                            int posisiBonusExp6 = baris.indexOf(EXP_IDENTIFIER);
+                            int posisiDiff6 = baris.indexOf(DIFFICULTY_IDENTIFIER);
+                            int posisiStatus6 = baris.indexOf(STATUS_IDENTIFIER);
+
+                            String idQuest6 = baris.substring(0, posisiNama6);
+                            String status6 = baris.substring(posisiStatus6 + 1);
+
+                            if (idQuest6.equalsIgnoreCase(idquestSelesai)) {
+                                if (status6.startsWith("diambil-")) {
+                                    questKetemu6 = true;
+                                    idPengembaraYangAmbil = status6.substring(status6.indexOf("-") + 1);
+                                    bonusExpQ = Long.parseLong(baris.substring(posisiBonusExp6 + 1, posisiDiff6));                                    
+                                    break;
+                                }
+
+                            }
+                        }
+                        cariQuest6.close();
+
+                        Scanner cariPengembara6 = new Scanner(travelerData);
+                        long expLama = 0;
+                        int levelBaru = 0;
+                        boolean naikLevel = false;
+                        long totalexpBaru = 0;
+                        String travelerDataBaru = "";
+
+                        while (cariPengembara6.hasNextLine()) {
+                            String baris6 = cariPengembara6.nextLine();
+                            int posisiNamaP6 = baris6.indexOf(NAME_IDENTIFIER);
+                            int level = baris6.indexOf(LEVEL_IDENTIFIER);
+                            int posisiExp6 = baris6.indexOf(EXP_IDENTIFIER);
+                            int statusP6 = baris6.indexOf(STATUS_IDENTIFIER);
+
+                            String idP6 = baris6.substring(0, posisiNamaP6);
+                            
+                            if (idP6.equalsIgnoreCase(idPengembaraYangAmbil)) {
+                                int levelLama6 = Integer.parseInt(baris6.substring(level + 1, posisiExp6));
+                                expLama = Long.parseLong(baris6.substring(posisiExp6 + 1, statusP6));
+                                totalexpBaru = expLama + bonusExpQ;
+                                long targetExp = (long) (5000 * Math.pow(2, levelLama6-1));
+
+                                if ((totalexpBaru >= targetExp) && (levelLama6 < 20)) {
+                                    levelBaru = levelLama6 + 1;
+                                    naikLevel = true;
+                                } else {
+                                    levelBaru = levelLama6;
+                                }
+                                if (totalexpBaru > MAX_EXP) {
+                                    totalexpBaru = MAX_EXP; 
+                                }
+
+                                namaP = baris6.substring(posisiNamaP6 + 1, level);
+                                travelerDataBaru += idP6 + NAME_IDENTIFIER + namaP + LEVEL_IDENTIFIER + levelBaru +EXP_IDENTIFIER + totalexpBaru + STATUS_IDENTIFIER + "kosong\n";
+                                travelerData = travelerDataBaru;
+                            } else {
+                                travelerDataBaru += baris6 + "\n";
+                            }
+                        }    
+                        cariPengembara6.close();
+
+                        if (questKetemu6) {
+                            String questDataBaru = "";
+                            Scanner updateQuest = new Scanner(questData);
+
+                            while (updateQuest.hasNextLine()) {
+                                String baris = updateQuest.nextLine();
+                                if (baris.startsWith(idquestSelesai + NAME_IDENTIFIER)) {
+                                    int posisiStatus = baris.indexOf(STATUS_IDENTIFIER);
+                                    questDataBaru += baris.substring(0, posisiStatus + 1) + "selesai\n";
+                                } else {
+                                    questDataBaru += baris + "\n";
+                                }
+                            }
+                            questData = questDataBaru;
+                            updateQuest.close();
+                            System.out.println("Quest berhasil diselesaikan!");
+                            System.out.println("Exp didapatkan : " + bonusExpQ);
+                            System.out.println("Total Exp : " + totalexpBaru);
+
+                            if (naikLevel) {
+                                System.out.println("Level pengembara naik menjadi : " + levelBaru);
+                            }
+                            balikMenu6 = true;
+                            break;                        
+                        } else {
+                            System.out.println("Quest tidak ditemukan atau belum diambil/selesai.");
+                        }
+                    }    
                     break;
+
                 case "7":
                     // TODO: Filter daftar quest
                     System.out.println("Belum diimplementasikan");
