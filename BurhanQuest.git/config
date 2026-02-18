@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/salsabillahasan/BurhanQuest
+	fetch = +refs/*:refs/*
+	mirror = true
+	pushurl = https://github.com/DDP2-Genap-2025-2026/tp1-genap-2526-salsabillahasan
